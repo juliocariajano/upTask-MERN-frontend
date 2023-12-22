@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import Alerta from "../componentes/Alerta"
+import axios from "axios"
 const OlvidePassword = () => {
  const [email, setEmail] = useState("")
 const [alerta, setAlerta]= useState({})
 
-console.log(email)
 
  const handleSubmit = async e => {
   e.preventDefault();
@@ -17,6 +17,19 @@ console.log(email)
     });
     return 
   }  
+
+  try {
+        const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/usuarios/olvide-password`, {email})
+
+        setAlerta({
+          msg:data.msg,
+          error:false
+        })
+        console.log(data);
+  } catch (error) {
+    console.log(error.response)
+  }
+
 }
 const {msg}= alerta
 

@@ -2,72 +2,69 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import Alerta from "../componentes/Alerta"
 import axios from "axios"
-import { useRegistrarUsuario } from "../hooks/useRegistrarUsuario"
 const Registrar = () => {
  
-  const {usuario, handleSubmit,handleChange,msg, alerta}= useRegistrarUsuario()
 
-  console.log(usuario, handleSubmit,handleChange,msg, alerta,"estados registrar")
-  //   const [nombre, setNombre] = useState("")
-//   const [email, setEmail] = useState("")
-//   const [password, setPassword] = useState("")
-//   const [repetirPassword, setRepetirPassword] = useState("")
-//   const [alerta, setAlerta] = useState({})
+    const [nombre, setNombre] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [repetirPassword, setRepetirPassword] = useState("")
+  const [alerta, setAlerta] = useState({})
 
-//   const handleSubmit = async e =>{
-//     e.preventDefault();
-//     if([nombre, email, password, repetirPassword].includes("")){
+  const handleSubmit = async e =>{
+    e.preventDefault();
+    if([nombre, email, password, repetirPassword].includes("")){
    
-//       setAlerta({
-//         msg:"Todos los campos son obligatorios",
-//         error:true
-//         })
-//         return
-//   }
+      setAlerta({
+        msg:"Todos los campos son obligatorios",
+        error:true
+        })
+        return
+  }
 
-//   if(password !== repetirPassword){
-//     setAlerta({
-//       msg:"Los password no son iguales",
-//       error:true
-//     })
-//     return
-//   }
+  if(password !== repetirPassword){
+    setAlerta({
+      msg:"Los password no son iguales",
+      error:true
+    })
+    return
+  }
 
-//   if(password.length < 6){
-//     setAlerta({
-//       msg:"El password es muy corto, agrega minimo seis caracteres",
-//       error:true
-//     })
-//     return
-//   }
+  if(password.length < 6){
+    setAlerta({
+      msg:"El password es muy corto, agrega minimo seis caracteres",
+      error:true
+    })
+    return
+  }
 
-//   setAlerta({})
+  setAlerta({})
 
-// // Crear usuarios
-// try {
-//   const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/usuarios`, {nombre, email, password})
-//   console.log(data)
-//   setAlerta({
-//     msg:data.msg,
-//     error:false
-//   })
+// Crear usuarios
+try {
+  const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/usuarios`, {nombre, email, password})
+  console.log(data)
+  setAlerta({
+    msg:data.msg,
+    error:false
+  })
 
-//   setNombre(""),
-//   setEmail(""),
-//   setPassword(""),
-//   setRepetirPassword("")
+  setNombre(""),
+  setEmail(""),
+  setPassword(""),
+  setRepetirPassword("")
   
-// } catch (error) {
-//   setAlerta({
-//     msg:error.response.data.msg,
-//     error:true
-//   })
+} catch (error) {
+  setAlerta({
+    msg:error.response.data.msg,
+    error:true
+  })
 
-//}
+}
 
-  //}
+  }
 
-  // const {msg} = alerta
+  const {msg} = alerta
 
   return (
     <>
@@ -91,8 +88,8 @@ const Registrar = () => {
       
       placeholder="Nombre de usuario "
       className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-      value={usuario.nombre}
-      onChange={(e)=>handleChange(e.target.value)}
+      value={nombre}
+      onChange={(e)=>setNombre(e.target.value)}
       />
     </div>
 
@@ -105,8 +102,8 @@ const Registrar = () => {
       type= "email"
       placeholder="Email de registro"
       className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-      value={usuario.email}
-      onChange={(e)=>handleChange(e.target.value)}
+      value={email}
+      onChange={(e)=>setEmail(e.target.value)}
 
       />
     </div>
@@ -121,8 +118,8 @@ const Registrar = () => {
       type= "password"
       placeholder="Password de registro"
       className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-      value={usuario.password}
-      // onChange={e=> setPassword(e.target.value)}
+      value={password}
+      onChange={e=> setPassword(e.target.value)}
       />
     </div> 
 
@@ -135,8 +132,8 @@ const Registrar = () => {
       type= "password"
       placeholder="Repita la Password"
       className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-      value={usuario.repetirPassword}
-      // onChange={e=> setRepetirPassword(e.target.value)}
+      value={repetirPassword}
+      onChange={e=> setRepetirPassword(e.target.value)}
      />
     </div> 
 <input
