@@ -27,7 +27,10 @@ const [alerta, setAlerta]= useState({})
         })
         console.log(data);
   } catch (error) {
-    console.log(error.response)
+   setAlerta({
+    msg:error.response.data.msg,
+    error:true
+   })
   }
 
 }
