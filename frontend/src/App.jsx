@@ -6,14 +6,16 @@ import Registrar from "./paginas/Registrar"
 import OlvidePassword from "./paginas/OlvidePassword"
 import NuevoPassword from "./paginas/NuevoPassword"
 import ConfirmarCuenta from "./paginas/ConfirmarCuenta"
-import { AuthProvider } from "./context/AuthProvider"
 import Proyectos from "./paginas/Proyectos"
-
+import NuevoProyecto from "./paginas/NuevoProyecto"
+import { AuthProvider } from "./context/AuthProvider"
+import { ProyectosProvider } from "./context/ProyectosProvider"
 function App() {
 
   return (
     <BrowserRouter>
   <AuthProvider>
+<ProyectosProvider>
 
     <Routes>
 
@@ -28,12 +30,14 @@ function App() {
     
     <Route path="/proyectos" element={<RutaProtegida/>} >
       <Route index element = {<Proyectos/>}/>
+      <Route path = "crear-proyecto" element={<NuevoProyecto/>}/>
 
     </Route>
 
 
        </Routes>
 
+</ProyectosProvider>
 
     </AuthProvider>    
 
