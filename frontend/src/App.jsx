@@ -1,20 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import AuthLayout from "./layouts/AuthLayout"
+import RutaProtegida from "./layouts/RutaProtegida"
 import Login from "./paginas/Login"
 import Registrar from "./paginas/Registrar"
 import OlvidePassword from "./paginas/OlvidePassword"
 import NuevoPassword from "./paginas/NuevoPassword"
 import ConfirmarCuenta from "./paginas/ConfirmarCuenta"
-
-
-
-console.log(import.meta.env.VITE_BACKEND_URL)
+import { AuthProvider } from "./context/AuthProvider"
+import Proyectos from "./paginas/Proyectos"
 
 function App() {
 
   return (
     <BrowserRouter>
-    
+  <AuthProvider>
+
     <Routes>
 
     <Route path="/" element={<AuthLayout/>}>
@@ -25,7 +25,17 @@ function App() {
       <Route path="confirmar/:id" element = {<ConfirmarCuenta/>}/>
     
      </Route>
+    
+    <Route path="/proyectos" element={<RutaProtegida/>} >
+      <Route index element = {<Proyectos/>}/>
+
+    </Route>
+
+
        </Routes>
+
+
+    </AuthProvider>    
 
     </BrowserRouter>
   //   <div className="App">

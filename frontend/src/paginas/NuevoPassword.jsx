@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import {Link, useParams } from "react-router-dom"
 import axios from "axios"
 import Alerta from "../componentes/Alerta"
+import clienteAxios from "../config/clienteAxios"
 
 const NuevoPassword = () => {
 
@@ -16,7 +17,7 @@ const NuevoPassword = () => {
     const comprobarToken = async () => {
 
       try {
-       await axios(`${import.meta.env.VITE_BACKEND_URL}/api/v1/usuarios/olvide-password/${token}`)
+       await clienteAxios(`/usuarios/olvide-password/${token}`)
         setTokenValido(true)
       } catch (error) {
        setAlerta({
@@ -31,7 +32,7 @@ const NuevoPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if( password.length > 6){
+    if( password.length < 6){
       setAlerta({
         msg:"El password debe ser minimo de 6 caracteres",
         error: true
@@ -39,8 +40,8 @@ const NuevoPassword = () => {
       return 
     }
     try {
-      const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/usuarios/olvide-password/${token}`
-      const {data} = await axios.post(url,{password})
+      const url = `/usuarios/olvide-password/${token}`
+      const {data} = await clienteAxios.post(url,{password})
 
       setAlerta({
         msg: data.msg,
